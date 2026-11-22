@@ -27,6 +27,7 @@ public class AutenticarUsuario{
             throw new IllegalArgumentException("Código no puede ser nulo/vacío");
         if(contrasena==null||contrasena.length==0)
             throw new IllegalArgumentException("Contraseña no puede ser nula/vacía");
+        logger.debug("Iniciando validación de credenciales para el código: {}", codigo);
         try{
             Optional<Usuario> encontrado=repositorioUsuario.buscarPorCodigo(codigo);
             if(encontrado.isEmpty()){
@@ -39,10 +40,11 @@ public class AutenticarUsuario{
                 logger.warn("Intento de login fallido para usuario '{}'", codigo);
                 throw new IllegalStateException("Credenciales inválidas");
             }
-            logger.info("Login exitoso: {}", usuario);
+            logger.info("Login exitoso para el usuario: {} - Rol: {}", codigo, usuario.getRol());
             return usuario;
         }finally{
             Arrays.fill(contrasena, '\0');
+            logger.debug("Arreglo de contraseña limpiado de la memoria para: {}", codigo);
         }
     }
 }

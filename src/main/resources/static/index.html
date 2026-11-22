@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Liverpool Restobar</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=7">
+</head>
+<body>
+  <div id="view-login" class="login-container" hidden>
+    <div class="login-left">
+      <div class="login-card">
+        <div class="login-header">
+          <span class="brand-subtitle">Sistema de Comandas</span>
+          <h1 class="brand-title">Liver<span>pool</span><br>Restobar</h1>
+          <div class="decorative-line"></div>
+          <p class="welcome-text">Bienvenido al portal administrativo. Ingrese sus credenciales para gestionar la operación del local.</p>
+        </div>
+        <form id="form-login">
+          <div class="form-group">
+            <label for="codigo">Código de Usuario</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <input type="text" id="codigo" placeholder="Ej. admin" autocomplete="username">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+              <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+            </div>
+          </div>
+          <p id="login-error" class="error-msg" hidden>Credenciales incorrectas. Verifique sus datos.</p>
+          <button type="submit" class="btn-primary">Acceder al Sistema</button>
+        </form>
+        <div class="login-footer">
+          © 2026 <span>Liverpool Restobar</span> · Miraflores, Lima<br>
+          Experiencia Gastronómica & Coctelería
+          <div class="version-badge">SISTEMA v1.0.0</div>
+        </div>
+      </div>
+    </div>
+    <div class="login-right"></div>
+  </div>
+
+  <div id="view-app" class="dashboard-layout" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-logo" id="sidebar-home" title="Ir al Inicio">Liver<span>pool</span></div>
+      <nav class="nav-menu" id="nav-menu"></nav>
+      <div class="sidebar-user">
+        <h4 id="user-nombre"></h4>
+        <p id="user-rol"></p>
+        <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 id="page-title">Dashboard</h1>
+          <p id="current-date"></p>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-btn" title="Notificaciones">
+            <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
+            <span class="badge"></span>
+          </button>
+          <div class="avatar" id="user-avatar">A</div>
+        </div>
+      </header>
+      <div class="content-area animate-fade" id="content-area"></div>
+    </main>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-container" class="toast-container"></div>
+
+  <script type="module" src="js/main.js?v=7"></script>
+</body>
+</html>

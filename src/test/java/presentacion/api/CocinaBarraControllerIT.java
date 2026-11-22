@@ -1,4 +1,5 @@
 package presentacion.api;
+import aplicacion.casosdeuso.GestionZonas;
 import boot.RestobarApp;
 import dominio.modelo.CategoriaProducto;
 import dominio.modelo.EstadoPedido;
@@ -8,10 +9,12 @@ import dominio.modelo.Mesero;
 import dominio.modelo.Monto;
 import dominio.modelo.Pedido;
 import dominio.modelo.Producto;
+import dominio.modelo.Zona;
 import dominio.puerto.repositorio.RepositorioMesa;
 import dominio.puerto.repositorio.RepositorioPedido;
 import dominio.puerto.repositorio.RepositorioProducto;
 import dominio.puerto.repositorio.RepositorioUsuario;
+import dominio.puerto.repositorio.RepositorioZona;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +39,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser(roles = "PREPARADOR")
 class CocinaBarraControllerIT{
     @Autowired MockMvc mockMvc;
+    @Autowired GestionZonas gestionZonas;
     @Autowired RepositorioMesa repositorioMesa;
     @Autowired RepositorioProducto repositorioProducto;
     @Autowired RepositorioUsuario repositorioUsuario;
     @Autowired RepositorioPedido repositorioPedido;
+    @Autowired RepositorioZona repositorioZona;
     private Long pedidoId;
     @BeforeEach
     void seed(){
-        Mesa mesa=new Mesa("M1", "Salón");
+        if (repositorioZona.buscarPorNombre("Salón Principal").isEmpty()) gestionZonas.agregar("Salón Principal");
+        Zona zona = repositorioZona.buscarPorNombre("Salón Principal").get();
+        Mesa mesa=new Mesa("M1", zona);
         repositorioMesa.agregar(mesa);
         Mesero mesero=new Mesero("juan", "hashfake123456", "12345678", "Juan", "Pérez");
         repositorioUsuario.agregar(mesero);

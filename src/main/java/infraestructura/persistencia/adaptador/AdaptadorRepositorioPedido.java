@@ -7,7 +7,6 @@ import infraestructura.persistencia.entidad.EntidadMesa;
 import infraestructura.persistencia.entidad.EntidadPedido;
 import infraestructura.persistencia.entidad.EntidadProducto;
 import infraestructura.persistencia.entidad.EntidadUsuario;
-import infraestructura.persistencia.mapper.MesaMapper;
 import infraestructura.persistencia.mapper.PedidoMapper;
 import infraestructura.persistencia.repositorioJPA.RepositorioMesaJPA;
 import infraestructura.persistencia.repositorioJPA.RepositorioPedidoJPA;
@@ -58,7 +57,8 @@ public class AdaptadorRepositorioPedido implements RepositorioPedido{
     }
     @Override
     public List<Pedido> listarPorMesa(Mesa mesa){
-        EntidadMesa em=MesaMapper.aEntidad(mesa);
+        EntidadMesa em=jpaMesa.findById(mesa.getId())
+                .orElseThrow(()->new IllegalStateException("Mesa no encontrada"));
         return jpa.findByMesa(em).stream().map(PedidoMapper::aDominio).toList();
     }
     @Override
@@ -67,14 +67,16 @@ public class AdaptadorRepositorioPedido implements RepositorioPedido{
     }
     @Override
     public List<Pedido> listarActivosPorMesa(Mesa mesa){
-        EntidadMesa em=MesaMapper.aEntidad(mesa);
+        EntidadMesa em=jpaMesa.findById(mesa.getId())
+                .orElseThrow(()->new IllegalStateException("Mesa no encontrada"));
         List<EstadoPedido> finalizados=List.of(EstadoPedido.PAGADO, EstadoPedido.CANCELADO);
         return jpa.findByMesaAndEstadoNotIn(em, finalizados).stream()
                 .map(PedidoMapper::aDominio).toList();
     }
     @Override
     public List<Pedido> listarPorMesaYEstado(Mesa mesa, EstadoPedido estado){
-        EntidadMesa em=MesaMapper.aEntidad(mesa);
+        EntidadMesa em=jpaMesa.findById(mesa.getId())
+                .orElseThrow(()->new IllegalStateException("Mesa no encontrada"));
         return jpa.findByMesaAndEstado(em, estado).stream()
                 .map(PedidoMapper::aDominio).toList();
     }

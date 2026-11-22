@@ -1,0 +1,13 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { 
+  font-family: var(--font-family); 
+  color: var(--text-main); 
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-deep);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+button, input { font: inherit; outline: none; border: none; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }

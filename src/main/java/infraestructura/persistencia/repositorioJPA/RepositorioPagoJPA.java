@@ -12,13 +12,15 @@ import java.util.Optional;
 public interface RepositorioPagoJPA extends JpaRepository<EntidadPago, Long>{
     @Override
     @EntityGraph(attributePaths={"pedido", "pedido.items", "pedido.items.producto",
-                                 "pedido.mesa", "pedido.mesero"})
+                                 "pedido.mesa", "pedido.mesa.zona", "pedido.mesero"})
     Optional<EntidadPago> findById(Long id);
+
     @Override
     @EntityGraph(attributePaths={"pedido", "pedido.items", "pedido.items.producto",
-                                 "pedido.mesa", "pedido.mesero"})
+                                 "pedido.mesa", "pedido.mesa.zona", "pedido.mesero"})
     List<EntidadPago> findAll();
+
     @EntityGraph(attributePaths={"pedido", "pedido.items", "pedido.items.producto",
-                                 "pedido.mesa", "pedido.mesero"})
+                                 "pedido.mesa", "pedido.mesa.zona", "pedido.mesero"})
     Optional<EntidadPago> findByPedido(EntidadPedido pedido);
 }

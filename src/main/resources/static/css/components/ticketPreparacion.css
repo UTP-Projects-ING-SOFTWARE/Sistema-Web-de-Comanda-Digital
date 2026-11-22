@@ -1,0 +1,7 @@
+/* ticketPreparacion.css — Tarjetas para cocina y barra */
+.ticket-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.ticket { background: var(--bg-surface); border-radius: var(--radius); border-left: 4px solid var(--primary); padding: 1.5rem; }
+.ticket-header { display: flex; justify-content: space-between; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+.ticket-items { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+.ticket-item { display: flex; justify-content: space-between; font-size: 1.1rem; }
+.ticket-actions { display: flex; gap: 0.5rem; }

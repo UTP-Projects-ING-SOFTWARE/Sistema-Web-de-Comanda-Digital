@@ -1,5 +1,6 @@
 package presentacion.api;
 import dominio.modelo.Usuario;
+import dominio.puerto.externo.LoggerPort;
 import infraestructura.seguridad.UsuarioDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,15 +31,19 @@ import presentacion.api.dto.LoginResponse;
 public class AuthController{
     private final AuthenticationManager authenticationManager;
     private final SecurityContextRepository securityContextRepository;
+    private final LoggerPort logger;
     public AuthController(AuthenticationManager authenticationManager,
-                          SecurityContextRepository securityContextRepository){
+                          SecurityContextRepository securityContextRepository,
+                          LoggerPort logger){
         this.authenticationManager=authenticationManager;
         this.securityContextRepository=securityContextRepository;
+        this.logger=logger;
     }
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest peticion,
                                                 HttpServletRequest request,
                                                 HttpServletResponse response){
+        logger.debug("Petición REST recibida para login: {}", peticion.codigo());
         Authentication auth=authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(peticion.codigo(), peticion.password()));
         SecurityContext context=SecurityContextHolder.createEmptyContext();
@@ -47,6 +52,7 @@ public class AuthController{
         securityContextRepository.saveContext(context, request, response);
         UsuarioDetails details=(UsuarioDetails)auth.getPrincipal();
         Usuario usuario=details.getUsuario();
+        logger.debug("Contexto de seguridad guardado para: {}", peticion.codigo());
         return ResponseEntity.ok(LoginResponse.desde(usuario, "Login exitoso"));
     }
     @GetMapping("/me")

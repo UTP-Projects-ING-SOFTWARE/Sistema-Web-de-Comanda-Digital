@@ -1,14 +1,17 @@
 package presentacion.api;
 import aplicacion.casosdeuso.ActualizarEstadoPedido;
 import aplicacion.casosdeuso.GestionUsuarios;
+import aplicacion.casosdeuso.GestionZonas;
 import boot.RestobarApp;
 import dominio.modelo.CategoriaProducto;
 import dominio.modelo.Mesa;
 import dominio.modelo.Monto;
 import dominio.modelo.Producto;
 import dominio.modelo.Rol;
+import dominio.modelo.Zona;
 import dominio.puerto.repositorio.RepositorioMesa;
 import dominio.puerto.repositorio.RepositorioProducto;
+import dominio.puerto.repositorio.RepositorioZona;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +39,10 @@ class MeseroControllerIT{
     @Autowired MockMvc mockMvc;
     @Autowired ObjectMapper objectMapper;
     @Autowired GestionUsuarios gestionUsuarios;
+    @Autowired GestionZonas gestionZonas;
     @Autowired RepositorioMesa repositorioMesa;
     @Autowired RepositorioProducto repositorioProducto;
+    @Autowired RepositorioZona repositorioZona;
     @Autowired ActualizarEstadoPedido actualizarEstadoPedido;
     private MockHttpSession session;
     private Long mesaId;
@@ -45,9 +50,10 @@ class MeseroControllerIT{
     @BeforeEach
     void seed() throws Exception{
         gestionUsuarios.agregar("admin", "admin123".toCharArray(), "00000000", "Admin", "Principal", Rol.ADMINISTRADOR);
-        gestionUsuarios.agregar("juan", "juan123".toCharArray(), "12345678",
-                "Juan", "Pérez", Rol.MESERO);
-        Mesa mesa=new Mesa("M1", "Salón");
+        gestionUsuarios.agregar("juan", "juan123".toCharArray(), "12345678", "Juan", "Pérez", Rol.MESERO);
+        if (repositorioZona.buscarPorNombre("Salón Principal").isEmpty()) gestionZonas.agregar("Salón Principal");
+        Zona zona = repositorioZona.buscarPorNombre("Salón Principal").get();
+        Mesa mesa=new Mesa("M1", zona);
         repositorioMesa.agregar(mesa);
         mesaId=mesa.getId();
         Producto producto=new Producto("Ceviche", Monto.de("25.50"), CategoriaProducto.COCINA);

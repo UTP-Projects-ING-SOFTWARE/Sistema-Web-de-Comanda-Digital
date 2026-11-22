@@ -12,18 +12,23 @@ import java.util.Optional;
  */
 public interface RepositorioPedidoJPA extends JpaRepository<EntidadPedido, Long>{
     @Override
-    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesero"})
+    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesa.zona", "mesero"})
     Optional<EntidadPedido> findById(Long id);
+
     @Override
-    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesero"})
+    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesa.zona", "mesero"})
     List<EntidadPedido> findAll();
-    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesero"})
+
+    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesa.zona", "mesero"})
     List<EntidadPedido> findByMesa(EntidadMesa mesa);
-    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesero"})
+
+    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesa.zona", "mesero"})
     List<EntidadPedido> findByEstado(EstadoPedido estado);
-    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesero"})
+
+    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesa.zona", "mesero"})
     List<EntidadPedido> findByMesaAndEstado(EntidadMesa mesa, EstadoPedido estado);
-    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesero"})
+
+    @EntityGraph(attributePaths={"items", "items.producto", "mesa", "mesa.zona", "mesero"})
     List<EntidadPedido> findByMesaAndEstadoNotIn(EntidadMesa mesa,
                                                   List<EstadoPedido> estados);
 }

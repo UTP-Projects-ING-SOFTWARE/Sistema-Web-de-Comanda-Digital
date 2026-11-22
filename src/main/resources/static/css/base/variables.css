@@ -1,0 +1,13 @@
+:root {
+  --bg-deep: #130D1C;
+  --bg-surface: #1C1429;
+  --accent-primary: #C2185B;
+  --accent-light: #E6D7F0;
+  --text-main: #F4EFF8;
+  --text-muted: #8E82A3;
+  --border-line: rgba(230, 215, 240, 0.15);
+  
+  --font-ui: 'Outfit', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}

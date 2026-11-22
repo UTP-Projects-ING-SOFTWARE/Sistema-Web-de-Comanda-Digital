@@ -1,0 +1,8 @@
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.stat-card { background: var(--bg-surface); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); display: flex; align-items: center; gap: 1rem; }
+.stat-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(144, 122, 255, 0.1); color: var(--primary); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; }
+.stat-info h3 { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
+.stat-info p { font-size: 1.8rem; font-weight: 800; color: var(--text-main); }
+.recent-activity { background: var(--bg-surface); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); }
+.recent-activity h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+.empty-state { text-align: center; color: var(--text-muted); padding: 3rem; font-style: italic; }
